@@ -16,13 +16,15 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "productname")
+    @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "price")
-    private Double price;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+
 
 }

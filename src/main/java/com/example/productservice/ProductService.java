@@ -19,9 +19,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void save(Product delivery) {
-        productRepository.save(delivery);
+    public Product save(Product product) {
+        return productRepository.saveAndFlush(product);
     }
+
 
     public ResponseEntity deleteProductById(Long id) {
         Optional<Product> toDelete = productRepository.findById(id);
@@ -33,23 +34,23 @@ public class ProductService {
     }
 
     @Transactional
-    public ResponseEntity updateProductById(Long id, Product delivery) {
+    public ResponseEntity updateProductById(Long id, Product product) {
         Optional<Product> toUpdate = productRepository.findById(id);
         if(toUpdate.isPresent()){
             Product l1 = toUpdate.get();
-            l1.setName(delivery.getName());
+            l1.setName(product.getName());
+            l1.setDescription(product.getDescription());
+            l1.setPrice(product.getPrice());
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     public Product getSpecificProduct(String name) {
-        Product product = productRepository.findByName(name);
-        return product;
+        return productRepository.findByName(name);
     }
 
     public List<Product> getSpecificProductByPrice(Double price) {
-        List<Product> products = productRepository.findByPrice(price);
-        return products;
+        return productRepository.findByPrice(price);
     }
 }
