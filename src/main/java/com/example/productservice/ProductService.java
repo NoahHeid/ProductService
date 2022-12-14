@@ -53,4 +53,14 @@ public class ProductService {
     public List<Product> getSpecificProductByPrice(Double price) {
         return productRepository.findByPrice(price);
     }
+
+    public double getPriceOfElements(List<Long> productIds) throws Exception {
+        double sum = 0;
+        for(Long productId: productIds){
+            Optional<Product> p = productRepository.findById(productId);
+            if(!p.isPresent()) throw new Exception();
+            sum += p.get().getPrice();
+        }
+        return sum;
+    }
 }

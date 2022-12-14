@@ -30,7 +30,17 @@ public class ProductController {
         List<Product> products = productService.getSpecificProductByPrice(price);
         return new ResponseEntity(products, HttpStatus.OK);
     }
+    @PostMapping("/get-price-of-elements")
+    public ResponseEntity getPriceOfElement(@RequestBody List<Long> productIds){
+        System.out.println(productIds);
+        try {
+            double price = productService.getPriceOfElements(productIds);
+            return new ResponseEntity(price, HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity("Fehlerhafte Anfrage!", HttpStatus.BAD_REQUEST);
+        }
 
+    }
     @PostMapping("/product")
     public ResponseEntity saveProduct(@RequestBody Product product){
         try {
