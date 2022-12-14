@@ -35,9 +35,9 @@ public class ProductController {
         System.out.println(productIds);
         try {
             double price = productService.getPriceOfElements(productIds);
-            return new ResponseEntity(price, HttpStatus.CREATED);
+            return new ResponseEntity(price, HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity("Fehlerhafte Anfrage!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(-1.0, HttpStatus.BAD_REQUEST);
         }
 
     }

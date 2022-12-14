@@ -58,7 +58,7 @@ public class ProductService {
         double sum = 0;
         for(Long productId: productIds){
             Optional<Product> p = productRepository.findById(productId);
-            if(!p.isPresent()) throw new Exception();
+            if(!p.isPresent()) throw new Exception("Element isn't part of the catalogue, please choose another!");
             sum += p.get().getPrice();
         }
         return sum;
